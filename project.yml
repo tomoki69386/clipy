@@ -1,0 +1,65 @@
+name: App
+options:
+  developmentLanguage: ja
+  xcodeVersion: 11.5
+config:
+  Debug: debug
+  Release: release
+targets:
+  App:
+    type: application
+    platform: iOS
+    developmentTarget: 13.0
+    sources:
+      - path: App
+    scheme: {}
+    dependencies:
+      - target: Shared
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: 1
+        DEVELOPMENT_TEAM: AV9FQ3YF56
+        PRODUCT_BUNDLE_IDENTIFIER: com.tomoki-sun.app.ios.App
+        INFOPLIST_FILE: ./App/Resources/Info.plist
+      configs:
+        Debug:
+          CODE_SIGN_IDENTITY: iPhone Developer
+        Release:
+          CODE_SIGN_IDENTITY: iPhone Distribution
+
+  AppTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: AppTests
+    dependencies:
+      - target: App
+    scheme:
+      gatherCoverageData: true
+      testTargets:
+        - AppTests
+
+  Shared:
+    type: framework
+    platform: iOS
+    sources: Shared
+    scheme:
+      gatherCoverageData: true
+      testTargets:
+        - SharedTests
+    info:
+      path: './Shared/Info.plist'
+      properties:
+        CFBundleName: Shared
+        CFBundleIdentifier: com.tomoki-sun.app.ios.Shared
+
+  SharedTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: SharedTests
+    dependencies:
+      - target: Shared
+    scheme:
+      gatherCoverageData: true
+      testTargets:
+        - SharedTests

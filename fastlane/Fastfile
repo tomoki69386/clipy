@@ -1,0 +1,80 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+  lane :all_certificates do
+    ios_identifier = 'com.tomoki-sun.app.ios.App'
+
+    match(
+      type: 'adhoc',
+      app_identifier: ios_identifier,
+      readonly: true
+    )
+
+    match(
+      type: 'appstore',
+      app_identifier: ios_identifier,
+      readonly: true
+    )
+
+    match(
+      type: 'development',
+      app_identifier: ios_identifier,
+      readonly: true
+    )
+  end
+
+  lane :upgrade_version do 
+    today = Date.today
+
+    shortVersionString = "#{today.year}.#{today.month}.#{today.day}"
+
+    set_info_plist_value(
+      path: './App/Resources/Info.plist',
+      key: 'CFBundleShortVersionString',
+      value: shortVersionString
+    )
+
+    set_info_plist_value(
+      path: './Shared/Info.plist',
+      key: 'CFBundleShortVersionString',
+      value: shortVersionString
+    )
+  end
+
+  lane :increment do 
+    build_number = get_info_plist_value(
+      path: './App/Resources/Info.plist',
+      key: 'CFBundleVersion'
+    ).to_i
+
+    build_number += 1
+
+    set_info_plist_value(
+      path: './App/Resources/Info.plist',
+      key: 'CFBundleVersion',
+      value: "#{build_number}"
+    )
+
+    set_info_plist_value(
+      path: './Shared/Info.plist',
+      key: 'CFBundleVersion',
+      value: "#{build_number}"
+    )
+  end
+end

@@ -1,0 +1,9 @@
+git_url("git@github.com:tomoki69386/certificates.git")
+
+type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
+
+app_identifier([
+  "com.tomoki-sun.app.ios.Recipe"
+])
+
+username("developertomokisun@gmail.com")

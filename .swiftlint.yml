@@ -1,0 +1,63 @@
+# 無効にするルール。
+disabled_rules:
+- nesting
+# コードの記載のない改行を許可
+- trailing_whitespace
+- missing_docs
+- switch_case_on_newline
+
+# デフォルト無効のルールのうち、有効にするもの。
+opt_in_rules:
+- closure_spacing
+- empty_count
+- fatal_error_message
+- first_where
+- missing_docs
+- nimble_operator
+- number_separator
+- object_literal
+- operator_usage_whitespace
+- overridden_super_call
+- prohibited_super_call
+- redundant_nil_coalescing
+- switch_case_on_newline
+
+# 下記は対象に含めない
+excluded:
+- .build/
+- Pods/
+- Carthage/
+- "*Tests/"
+- vendor/
+
+# 1行の文字列制限
+line_length:
+- 100
+- 200
+
+# 型の行数制限
+type_body_length:
+- 100
+- 200
+
+# 1ファイルの行数制限
+file_length:
+- 500
+- 1000
+
+cyclomatic_complexity:
+- 100
+- 200
+
+# メソッドの行数制限
+function_body_length:
+- 50
+- 100
+
+type_name:
+  min_length: 3
+  max_length: 80
+
+# 変数名が１文字以上なら許可に変更
+identifier_name:
+  min_length: 1

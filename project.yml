@@ -28,15 +28,17 @@ targets:
       - package: ComposableArchitecture
     settings:
       base:
-        TARGETED_DEVICE_FAMILY: 1
+        TARGETED_DEVICE_FAMILY: 1,2
         DEVELOPMENT_TEAM: AV9FQ3YF56
-        PRODUCT_BUNDLE_IDENTIFIER: com.tomoki-sun.app.ios.App
+        PRODUCT_BUNDLE_IDENTIFIER: com.tomoki-sun.app.ios.Clipy
         INFOPLIST_FILE: ./Clipy/Resources/Info.plist
       configs:
         Debug:
           CODE_SIGN_IDENTITY: iPhone Developer
+          PROVISIONING_PROFILE_SPECIFIER: match Development com.tomoki-sun.app.ios.Clipy
         Release:
           CODE_SIGN_IDENTITY: iPhone Distribution
+          PROVISIONING_PROFILE_SPECIFIER: match AppStore com.tomoki-sun.app.ios.Clipy
 
   ClipyTests:
     type: bundle.unit-test

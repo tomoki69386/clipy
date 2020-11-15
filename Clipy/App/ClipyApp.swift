@@ -6,12 +6,19 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct ClipyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HistoryListView(
+                store: .init(
+                    initialState: HistoryListState(),
+                    reducer: historyListReducer,
+                    environment: HistoryListEnvironment()
+                )
+            )
         }
     }
 }

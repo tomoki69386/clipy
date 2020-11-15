@@ -18,7 +18,7 @@ default_platform(:ios)
 platform :ios do
 
   lane :all_certificates do
-    ios_identifier = 'com.tomoki-sun.app.ios.App'
+    ios_identifier = 'com.tomoki-sun.app.ios.Clipy'
 
     match(
       type: 'adhoc',

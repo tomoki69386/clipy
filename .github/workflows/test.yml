@@ -36,39 +36,7 @@ jobs:
     - name: application test
       run: |
         set -o pipefail
-        xcodebuild build-for-testing test-without-building -project App.xcodeproj -scheme AppTests -configuration Debug -sdk iphonesimulator -destination "name=iPhone 8" ENABLE_TESTABILITY=YES | xcpretty -c
-
-    - name: codecov
-      run: bash <(curl -s https://codecov.io/bash)
-      if: success()
-  
-  test-shared:
-    runs-on: macOS-latest
-    env:
-      MINT_PATH: mint/lib
-      MINT_LINK_PATH: mint/bin
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Install Mint
-      run: brew install mint
-
-    - name: Cache Mint packages
-      uses: actions/cache@v2
-      with:
-        path: mint
-        key: ${{ runner.os }}-mint-${{ hashFiles('**/Mintfile') }}
-        restore-keys: |
-          ${{ runner.os }}-mint-
-
-    - name: Generate Xcode project with XcodeGen
-      run: mint run xcodegen xcodegen generate
-
-    - name: Shared framework test
-      run: |
-        set -o pipefail
-        xcodebuild build-for-testing test-without-building -project App.xcodeproj -scheme SharedTests -configuration Debug -sdk iphonesimulator -destination "name=iPhone 8" ENABLE_TESTABILITY=YES | xcpretty -c
+        xcodebuild build-for-testing test-without-building -project Clipy.xcodeproj -scheme ClipyTests -configuration Debug -sdk iphonesimulator -destination "name=iPhone 8" ENABLE_TESTABILITY=YES | xcpretty -c
 
     - name: codecov
       run: bash <(curl -s https://codecov.io/bash)

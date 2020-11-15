@@ -45,13 +45,7 @@ platform :ios do
     shortVersionString = "#{today.year}.#{today.month}.#{today.day}"
 
     set_info_plist_value(
-      path: './App/Resources/Info.plist',
-      key: 'CFBundleShortVersionString',
-      value: shortVersionString
-    )
-
-    set_info_plist_value(
-      path: './Shared/Info.plist',
+      path: './Clipy/Resources/Info.plist',
       key: 'CFBundleShortVersionString',
       value: shortVersionString
     )
@@ -59,20 +53,14 @@ platform :ios do
 
   lane :increment do 
     build_number = get_info_plist_value(
-      path: './App/Resources/Info.plist',
+      path: './Clipy/Resources/Info.plist',
       key: 'CFBundleVersion'
     ).to_i
 
     build_number += 1
 
     set_info_plist_value(
-      path: './App/Resources/Info.plist',
-      key: 'CFBundleVersion',
-      value: "#{build_number}"
-    )
-
-    set_info_plist_value(
-      path: './Shared/Info.plist',
+      path: './Clipy/Resources/Info.plist',
       key: 'CFBundleVersion',
       value: "#{build_number}"
     )

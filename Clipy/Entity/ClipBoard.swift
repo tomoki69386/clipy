@@ -27,6 +27,7 @@ struct ClipBoard: Equatable, Translatorable, Identifiable {
     }
     
     static func translator(_ items: [[String : Any]]) -> [ClipBoard] {
+        print(items)
         var clips: [ClipBoard] = []
         items.forEach({
             $0.filter { $0.key == "public.url" }
@@ -48,5 +49,33 @@ struct ClipBoard: Equatable, Translatorable, Identifiable {
                 }
         })
         return clips
+    }
+}
+
+protocol PasteboardProtocol {
+    var items: [[String : Any]] { get }
+    var string: String? { get set }
+}
+
+extension UIPasteboard: PasteboardProtocol { }
+
+struct PasteboardFetcher {
+    let pasteboard: PasteboardProtocol
+    
+    init(pasteboard: PasteboardProtocol = UIPasteboard.general) {
+        self.pasteboard = pasteboard
+    }
+    
+    func fetch() -> String? {
+        return pasteboard.string
+    }
+    
+    func fetchAll() -> [ClipBoard] {
+        return translator()
+    }
+    
+    private func translator() -> [ClipBoard] {
+        let items = pasteboard.items
+        return ClipBoard.translator(items)
     }
 }
